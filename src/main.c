@@ -8,14 +8,19 @@
 #include <stdio.h>
 #include <mpi.h>
 
+#define BUFSIZE 100
+
 int main(int argc, char *argv[]) {
   int rank, size;
+  int length;
+  char name[BUFSIZE];
 
   MPI_Init(&argc, &argv);
   MPI_Comm_rank(MPI_COMM_WORLD, &rank);
   MPI_Comm_size(MPI_COMM_WORLD, &size);
+  MPI_Get_processor_name(name, &length);
 
-  printf("Hello, world! I am %d of %d\n", rank, size);
+  printf("Hello from: %s! I am %d of %d\n", name, rank, size);
 
   MPI_Finalize();
   return 0;
